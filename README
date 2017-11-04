@@ -1,0 +1,10 @@
+A recreational hobby project, recreating common Javascript libraries and tooling
+without any dependencies.
+
+To be able to do anything else I start by building a testrunner.
+After that a code bundler (inspired by Webpack).
+
+- unit: Testrunner
+- bundle: Code Bundler
+- act: Library for client side views
+- dux: Library for state management
