@@ -1,0 +1,25 @@
+{
+  "name": "nil",
+  "version": "1.0.0",
+  "description": "A recreational hobby project, recreating common Javascript libraries and tooling without any dependencies.",
+  "main": "app.js",
+  "scripts": {
+    "test": "unit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlie-rudenstal/nil.git"
+  },
+  "author": "Charlie Rudenstål <charlie4@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/charlie-rudenstal/nil/issues"
+  },
+  "homepage": "https://github.com/charlie-rudenstal/nil#readme",
+  "bin": {
+    "unit": "unit/unit.js"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
