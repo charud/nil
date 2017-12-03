@@ -44,9 +44,21 @@ function expect(value) {
       }
     },
     toShallowEqual: function(expectation) {
+      if (!value) {
+        throw new Error(`Expected "${value}" to equal "${expectation}"`);
+      }
       if (Array.isArray(expectation)) {
         if (value.toString() !== expectation.toString()) {
           throw new Error(`Expected array "${value}" to equal "${expectation}"`);
+        }
+      } else if (typeof(value) === 'object') {
+        if (value.length !== expectation.length) {
+          throw new Error(`Expected "${JSON.stringify(value)}" to equal "${JSON.stringify(expectation)}". Length is different.`);
+        }
+        for (var i in value) {
+          if (expectation[i] !== value[i]) {
+            throw new Error(`Expected "${JSON.stringify(value)}" to equal "${JSON.stringify(expectation)}".`);
+          }
         }
       } else if (value != expectation) {
         throw new Error(`Expected "${value}" to equal "${expectation}"`);

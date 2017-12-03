@@ -10,7 +10,7 @@ describe('testGlobals', () => {
   it('records a new test suite when describe is called', () => {
     recorder.reset();
     testGlobals.describe('suite', () => {}, recorder);
-    expect(recorder.getSuites()).toShallowEqual('suite');
+    expect(recorder.getSuites()).toShallowEqual(['suite']);
   });
 
   it('calls the suite function when describe is called', () => {
@@ -23,19 +23,19 @@ describe('testGlobals', () => {
   it('records a new test when it is called', () => {
     recorder.reset();
     testGlobals.it('test', () => {}, recorder);
-    expect(recorder.getTests()).toShallowEqual('test');
+    expect(recorder.getTests()).toShallowEqual(['test']);
   });
 
   it('records a pass for a test without any errors', () => {
     recorder.reset();
     testGlobals.it('passes', () => {}, recorder);
-    expect(recorder.getPassedTest()).toShallowEqual('passes');
+    expect(recorder.getPassedTest()).toShallowEqual(['passes']);
   });
 
   it('records a failed for a test with errors', () => {
     recorder.reset();
     testGlobals.it('fails', () => { expect(true).toBe(false) }, recorder);
-    expect(recorder.getFailedTests()).toShallowEqual('fails');
+    expect(recorder.getFailedTests()).toShallowEqual(['fails']);
   });
 });
 

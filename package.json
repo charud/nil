@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/charlie-rudenstal/nil#readme",
   "bin": {
-    "unit": "unit/unit.js"
+    "unit": "unit/unit.js",
+    "bundle": "bundle/bundle.js"
   },
   "engines": {
     "node": ">=8.0.0"
