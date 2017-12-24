@@ -2,7 +2,7 @@ A recreational hobby project, where I recreate common Javascript libraries and t
 without using any dependencies.
 
 - [x] unit: Test Runner
-- [x] bundle: Code Bundler
+- [x] pack: Code Bundler
 - [ ] act: Library for client side views
 - [ ] dux: Library for state management
 
@@ -27,7 +27,7 @@ Alternatively you can call the unit tester directly
   $ node unit/unit.js
 ```
 
-## Bundle
+## Pack
 
 Takes an entry-file and bundles all modules it requires into a single output-file.
 
@@ -48,8 +48,8 @@ Takes an entry-file and bundles all modules it requires into a single output-fil
 ```
 
 ```sh
-  $ bundle app.js bundle.js
-  Bundle
+  $ pack app.js bundle.js
+  Pack
   Bundling app.js into bundle.js
   Done
   $ node bundle.js

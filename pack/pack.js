@@ -3,7 +3,7 @@ const fileResolver = require('./fileResolver');
 const bundler = require('./bundler.js')(fileResolver);
 const fs = require('fs');
 
-console.log("Bundle");
+console.log("Pack");
 
 let args = process.argv.slice(2);
 const inputFile = args[0];
