@@ -9,6 +9,11 @@ let args = process.argv.slice(2);
 const inputFile = args[0];
 const outputFile = args[1];
 
+if (!inputFile || !outputFile) {
+  console.log('Usage: pack inputFile outputFile\n- inputFile should be the entry-point to the application\n- outputFile will be created and contain the final bundle');
+  process.exit();
+}
+
 console.log(`Bundling ${inputFile} into ${outputFile}`);
 
 bundler.bundle(inputFile)
