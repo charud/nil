@@ -1,4 +1,4 @@
-var testGlobals = require('./testGlobals');
+var testGlobals = require('../testGlobals');
 // var recorder = require('./testRecorder')();
 var recorder = MockRecorder();
 

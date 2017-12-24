@@ -1,5 +1,5 @@
 const fs = require('fs');
-const findTestFiles = require('./findTestFiles');
+const findTestFiles = require('../findTestFiles');
 
 mockFs();
 
