@@ -1,3 +1,4 @@
+const deepEqual = require('./deepEqual');
 const colors = require('./colors');
 const strCheck = `${colors.fgGreen}✓${colors.reset}`;
 const strCross = `${colors.fgRed}✖${colors.reset}`;
@@ -53,15 +54,22 @@ function expect(value) {
         }
       } else if (typeof(value) === 'object') {
         if (value.length !== expectation.length) {
-          throw new Error(`Expected "${JSON.stringify(value)}" to equal "${JSON.stringify(expectation)}". Length is different.`);
+          throw new Error(`Expected object "${JSON.stringify(value)}" to equal "${JSON.stringify(expectation)}", but length is different.`);
         }
         for (var i in value) {
           if (expectation[i] !== value[i]) {
-            throw new Error(`Expected "${JSON.stringify(value)}" to equal "${JSON.stringify(expectation)}".`);
+            throw new Error(`Expected object "${JSON.stringify(value)}" to equal "${JSON.stringify(expectation)}". ` +
+              `Got { ${i}: ${JSON.stringify(value[i])} } but ` +
+              `expected { ${i}: ${JSON.stringify(expectation[i])} }`);
           }
         }
       } else if (value != expectation) {
-        throw new Error(`Expected "${value}" to equal "${expectation}"`);
+        throw new Error(`Expected value "${value}" to equal "${expectation}"`);
+      }
+    },
+    toDeepEqual: function(expectation) {
+      if (!deepEqual(expectation, value)) {
+        throw new Error(`Expected value "${JSON.stringify(value)} to deep equal "${JSON.stringify(expectation)}"`);
       }
     }
   }
