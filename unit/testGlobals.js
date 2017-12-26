@@ -37,11 +37,25 @@ function beforeEach(fn) {
   beforeEachFn = fn;
 }
 
+function diff(a, b) {
+  let strDiff = '';
+  let strA = a.toString();
+  let strB = b.toString();
+  for (var i in strA) {
+    if (strA[i] === strB[i]) {
+      strDiff += colors.fgGreen + strA[i] + colors.reset;
+    } else {
+      strDiff += colors.fgRed + strA[i] + colors.reset;
+    }
+  }
+  return strDiff;
+}
+
 function expect(value) {
   const matchers = {
     toBe: function(expectation) {
       if (value !== expectation) {
-        throw new Error(`Expected "${value}" to be "${expectation}"`);
+        throw new Error(`Expected "${value}" to be "${expectation}".\nDiff: ${diff(expectation, value)}`);
       }
     },
     toShallowEqual: function(expectation) {

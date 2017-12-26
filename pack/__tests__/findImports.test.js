@@ -2,7 +2,7 @@ const findImports = require('../findImports');
 
 const input = `
   const moduleA = require('moduleA');
-  require('./moduleB.js');
+  require("./moduleB.js");
   function() {
     const moduleC = require('./dir/moduleC.js');
   }
