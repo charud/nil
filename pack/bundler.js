@@ -11,7 +11,6 @@ function bundler(fileResolver) {
     return bundle;
   }
 
-  // TODO: Continue on this function
   async function findModulesRecursively(inModule) {
     // Find imports in this module and retrieve their modules
     const foundModules = await resolveArrayUsing(findImports(inModule), path =>

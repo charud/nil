@@ -11,9 +11,6 @@ const moduleA = 'function foo() {}; module.exports = { foo };';
 const moduleB = 'const moduleC = require("./moduleC"); function bar() {}; module.exports = bar;';
 const moduleC = 'function baz() {}; module.exports = baz;';
 
-/*
-  TODO: Make sure that moduleC is added to __modules
-*/
 const expectedOutput = `
 const __modules = {
 './moduleA': function() { function foo() {}; return { foo }; },
