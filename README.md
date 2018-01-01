@@ -56,3 +56,16 @@ Takes an entry-file and bundles all modules it requires into a single output-fil
   Sum:  5
 ```
 
+# Sample App
+
+Build the sample app like this:
+```sh
+  $ pack sampleApp/app.js sampleApp/bundle.js
+```
+
+And then run it using any web server, for example:
+```sh
+  $ cd sampleApp
+  $ python -m SimpleHTTPServer
+  Serving HTTP on 0.0.0.0 port 8000 ...
+```
