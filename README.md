@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/charlie-rudenstal/nil.svg?branch=master)](https://travis-ci.org/charlie-rudenstal/nil)
+
 A recreational hobby project, where I recreate common Javascript libraries and tooling
 without using any dependencies.
 

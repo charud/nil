@@ -22,11 +22,11 @@ async function run() {
   }
   if (testRecorder.hasFailed()) {
     console.log('\nDone with errors');
-    return;
+    process.exit(1);
   }
   if (testRecorder.hasStillRunning()) {
     console.log('\nWarning: Some tests did not complete');
-    return;
+    process.exit(1);
   }
   console.log(`\nDone. ${testRecorder.getTestCount()} tests passed.`);
 }
