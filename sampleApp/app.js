@@ -1,4 +1,4 @@
-const act = require('../act/act.js');
+const act = require('../act/act');
 
 function App() {
   return act('div', {}, 'Hello');

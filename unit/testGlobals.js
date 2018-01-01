@@ -55,7 +55,12 @@ function expect(value) {
   const matchers = {
     toBe: function(expectation) {
       if (value !== expectation) {
-        throw new Error(`Expected "${value}" to be "${expectation}".\nDiff: ${diff(expectation, value)}`);
+        throw new Error(`${colors.bright}Expected${colors.reset}\n"${value + colors.bright}"\nto be\n"${colors.reset + expectation}".\nDiff: ${diff(expectation, value)}`);
+      }
+    },
+    toContain: function(expectation) {
+      if (value.indexOf(expectation) === -1) {
+        throw new Error(`${colors.bright}Expected${colors.reset}\n"${value}"\n${colors.bright}to contain${colors.reset}\n"${expectation}"`);
       }
     },
     toShallowEqual: function(expectation) {

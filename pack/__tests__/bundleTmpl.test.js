@@ -13,7 +13,7 @@ const __modules = {
 './foo': function() { foo(); },
 './bar': function() { bar(); }
 };
-function require(path) { return __modules[path](); }
+function require(path) { if(path in __modules) return __modules[path](); console.log('Pack: Module', path, 'not found'); }
 foobar();
 `.trim());
   });

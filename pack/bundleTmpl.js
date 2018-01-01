@@ -6,7 +6,7 @@ ${Object.keys(modules)
   .map(name => `'${name}': function() { ${modules[name]} }`)
   .join(',\n')}
 };
-function require(path) { return __modules[path](); }
+function require(path) { if(path in __modules) return __modules[path](); console.log('Pack: Module', path, 'not found'); }
 ${entryModule}
 
 `.trim();
