@@ -1,6 +1,6 @@
 const __modules = {
-'/act/act': function() { const act = require('./createComponent');
-act.render = require('./render');
+'/act/act': function() { const act = require('/act/createComponent');
+act.render = require('/act/render');
 
 return act;
  },
@@ -30,16 +30,22 @@ return createComponent;
     || typeof component.type === 'undefined'
     || typeof component.props === 'undefined'
     || typeof component.children === 'undefined') {
-      throw new Error(`act.render was passed ${JSON.stringify(component)} which is not a valid component`);
+      console.error('act.render was passed', component, 'which is not a valid component');
+      throw new Error(`act.render was passed an invalid component`);
     }
 
   doc = doc || {
-    createElement: document.createElement
+    createElement: document.createElement.bind(document),
+    createTextNode: document.createTextNode.bind(document)
   };
 
   if (typeof component.type === 'string') {
     const elm = doc.createElement(component.type);
-    if (component.children) {
+    if (typeof component.children === 'string') {
+      // This component renders a text string
+      elm.appendChild(doc.createTextNode(component.children));
+    } else if (component.children) {
+      // This component renders other components
       const children = ensureArray(component.children);
       for (child of children) {
         const childElm = render(child, doc);
@@ -68,11 +74,10 @@ return render;
  }
 };
 function require(path) { if(path in __modules) return __modules[path](); console.log('Pack: Module', path, 'not found'); }
-const act = require('../act/act');
+const act = require('/act/act');
 
 function App() {
   return act('div', {}, 'Hello');
 }
-
-const elm = act.render(App);
+const elm = act.render(act(App));
 document.getElementById('root').appendChild(elm);

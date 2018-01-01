@@ -3,12 +3,24 @@ const act = require('../act');
 const doc = {
   createElement: function(type) {
     const elm = {
-      nodeName: type.toUpperCase(),
       children: [],
-      appendChild: child => elm.children.push(child)
+      appendChild: child => elm.children.push(child),
+      nodeName: type.toUpperCase(),
+      get firstChild() {
+        // Not completely correct since children != childNodes
+        // that firstChild operates on, but works for this DOM mock
+        return elm.children[0]
+      }
     }
     return elm;
-  }
+  },
+  createTextNode: function(text) {
+    const elm = {
+      nodeName: '#text',
+      nodeValue: text
+    }
+    return elm;
+  } 
 };
 
 describe('act render', () => {
@@ -74,6 +86,13 @@ describe('act render', () => {
     expect(elm.children[0].nodeName).toBe('H1');
     expect(elm.children[1].nodeName).toBe('DIV');
     expect(elm.children[2].nodeName).toBe('SPAN');
+  });
+
+  it('renders a textnode if a string is passed as children', () => {
+    const elm = act.render(act('div', {}, 'Foo'), doc);
+    expect(elm.nodeName).toBe('DIV');
+    expect(elm.firstChild.nodeName).toBe('#text');
+    expect(elm.firstChild.nodeValue).toBe('Foo');
   });
 
   it('throws if an non-component is passed to act.render', () => {
