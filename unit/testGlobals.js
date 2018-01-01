@@ -88,7 +88,7 @@ function expect(value) {
     },
     toDeepEqual: function(expectation) {
       if (!deepEqual(expectation, value)) {
-        throw new Error(`Expected value "${JSON.stringify(value)} to deep equal "${JSON.stringify(expectation)}"`);
+        throw new Error(`${colors.bright}Expected value${colors.reset}\n"${JSON.stringify(value)}\n${colors.bright}to deep equal${colors.reset}\n"${JSON.stringify(expectation)}"`);
       }
     }
   }

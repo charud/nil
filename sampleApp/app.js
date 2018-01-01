@@ -11,7 +11,7 @@ function App() {
 }
 
 function Header() {
-  return act('div', { style: { backgroundColor: '#333', color: '#eee' } },
+  return act('div', { style: `background-color: #333; color: #eee` },
     act('div', {}, "Sample app")
   );
 }

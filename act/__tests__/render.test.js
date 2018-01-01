@@ -95,6 +95,11 @@ describe('act render', () => {
     expect(elm.firstChild.nodeValue).toBe('Foo');
   });
 
+  it('adds attributes to elements when passed as props', () => {
+    const elm = act.render(act('div', { className: 'foo' }), doc);
+    expect(elm.className).toBe('foo');
+  });
+
   it('throws if an non-component is passed to act.render', () => {
     let wasThrown = false;
     try {

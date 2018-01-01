@@ -56,7 +56,7 @@ Takes an entry-file and bundles all modules it requires into a single output-fil
   Sum:  5
 ```
 
-# Sample App
+## Sample App
 
 Build the sample app like this:
 ```sh

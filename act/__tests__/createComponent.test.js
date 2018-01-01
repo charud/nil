@@ -53,4 +53,28 @@ describe('act createComponent', () => {
       ]
     })
   })
+
+  it('it includes props in the tree representation', () => {
+    const tree = act('div', { propA: 1, propB: 'b' });
+    expect(tree).toDeepEqual({
+      type: 'div',
+      props: { propA: 1, propB: 'b' },
+      children: null
+    })
+  });
+
+  it('calls complex components with the props provided', () => {
+    const component = ({textProp}) => act('div', {}, textProp);
+    const tree = act(component, { textProp: 'foo' });
+    expect(tree).toDeepEqual({
+      type: component,
+      props: { textProp: 'foo' },
+      children: {
+        type: 'div',
+        props: {},
+        children: 'foo'
+      }
+    })
+  });
+
 });
