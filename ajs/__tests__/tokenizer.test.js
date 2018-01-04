@@ -44,4 +44,27 @@ describe('tokenizer', () => {
     ]);
   });
 
+  it('tokenizes an empty arg', () => {
+    expect(tokenizer('<foo bar="" />')).toDeepEqual([
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'foo' },
+      { type: tokens.ATTRIBUTE_NAME, value: 'bar' },
+      { type: tokens.ATTRIBUTE_EQUAL },
+      { type: tokens.ATTRIBUTE_VALUE, value: '' },
+      { type: tokens.TAG_END_CLOSED }
+    ]);
+  });
+
+
+  it('ignores whitespace', () => {
+    expect(tokenizer('<foo     bar = "baz"   />')).toDeepEqual([
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'foo' },
+      { type: tokens.ATTRIBUTE_NAME, value: 'bar' },
+      { type: tokens.ATTRIBUTE_EQUAL },
+      { type: tokens.ATTRIBUTE_VALUE, value: 'baz' },
+      { type: tokens.TAG_END_CLOSED }
+    ]);
+  });
+
 });
