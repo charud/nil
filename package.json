@@ -4,7 +4,8 @@
   "description": "A recreational hobby project, recreating common Javascript libraries and tooling without any dependencies.",
   "main": "app.js",
   "scripts": {
-    "test": "node ./unit/unit"
+    "test": "node ./unit/unit",
+    "test:debug": "node --inspect=9229 ./unit/unit"
   },
   "repository": {
     "type": "git",

@@ -7,6 +7,7 @@ without using any dependencies.
 - [x] pack: Code Bundler
 - [ ] act: Library for client side views
 - [ ] dux: Library for state management
+- [ ] ajs: Transforms XML-like syntax into JS,
 
 ## Install
 

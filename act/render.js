@@ -16,7 +16,7 @@ function render(component, doc) {
     const elm = doc.createElement(component.type);
 
     // Add any props passed to this elemnt as attributes
-    // This lets users pass attributes such as id and className 
+    // This lets users pass attributes such as id and className
     for (var key in component.props) {
       elm[key] = component.props[key];
     }
