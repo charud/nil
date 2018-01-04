@@ -4,10 +4,10 @@ A recreational hobby project, where I recreate common Javascript libraries and t
 without using any dependencies.
 
 - [x] unit: Test Runner
-- [x] pack: Code Bundler
-- [ ] act: Library for client side views
-- [ ] dux: Library for state management
-- [ ] ajs: Transforms XML-like syntax into JS,
+- [x] pack: Code Bundler (inspired by Webpack)
+- [ ] act: Library for client side views (inspired by React)
+- [ ] dux: Library for state management (inspired by Redux)
+- [ ] ajs: Transforms XML-like syntax into JS (inspired by JSX)
 
 ## Install
 
