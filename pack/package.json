@@ -1,0 +1,18 @@
+{
+  "name": "nil-pack",
+  "version": "1.0.0",
+  "description": "Code bundler",
+  "main": "pack.js",
+  "author": "Charlie Rudenstål <charlie4@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlie-rudenstal/nil.git"
+  },
+  "bin": {
+    "unit": "pack/pack.js"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}

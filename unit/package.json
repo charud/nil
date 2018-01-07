@@ -1,0 +1,21 @@
+{
+  "name": "nil-unit",
+  "version": "1.0.0",
+  "description": "Test runner",
+  "main": "unit.js",
+  "scripts": {
+    "test": "node unit.js"
+  },
+  "author": "Charlie Rudenstål <charlie4@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlie-rudenstal/nil.git"
+  },
+  "bin": {
+    "unit": "unit/unit.js"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  }
+}
