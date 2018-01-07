@@ -1,49 +1,44 @@
-const fs = require('fs');
+const extname = require('path').extname;
 const findTestFiles = require('../findTestFiles');
 
-mockFs();
-
 describe('findTestFiles', () => {
-  it('should pass', () => {
-    expect(1).toBe(1);
-  });
-
   it('finds all test files in the current directory', () => {
-    return findTestFiles('.').then(files => {
+    _fs = mockFs({
+       '.': ['a.js',  'a.test.js', 'b.js', 'folder'],
+       './folder': ['c.js', 'c.test.js']
+    });
+    return findTestFiles('.', _fs).then(files => {
       expect(files).toShallowEqual(['./a.test.js', './folder/c.test.js'])
     });
   });
+
+  it('ignores files in node_modules', () => {
+    _fs = mockFs({
+       '.': ['foo', 'node_modules'],
+       './foo': ['a.test.js'],
+       './node_modules': ['b.test.js'],
+    });
+    return findTestFiles('.', _fs).then(files => {
+      expect(files).toShallowEqual(['./foo/a.test.js']);
+    });
+  })
 });
 
-/**
- * Mocks the following directory structure
- * - a.js
- * - a.test.js
- * - b.js
- * > folder
- *   - c.js
- *   - c.test.js
- */
-function mockFs() {
-  fs.readdir = (path, cb) => {
-    if (path === '.') {
-      cb(null, ['a.js',  'a.test.js', 'b.js', 'folder']);
-    } else if (path === './folder') {
-      cb(null, ['c.js', 'c.test.js']);
+function mockFs(fileMap) {
+  const _fs = {};
+  _fs.readdir = (path, cb) => {
+    if (path in fileMap) {
+      cb(null, fileMap[path]);
     } else {
       cb('readdir mock: Invalid path ' + path);
     }
-  }
-
-  fs.lstat = (path, cb) => {
-    const files = ['./a.js', './a.test.js', './b.js', './folder/c.js', './folder/c.test.js'];
-    const dirs = ['./folder'];
-    if (files.indexOf(path) > -1) {
+  };
+  _fs.lstat = (path, cb) => {
+    if (extname(path)) {
       cb(null, { isDirectory: () => false, isFile: () => true });
-    } else if (dirs.indexOf(path) > -1) {
-      cb(null, { isDirectory: () => true, isFile: () => false });
     } else {
-      cb(new Error('lstat: Path not found: ' + path));
+      cb(null, { isDirectory: () => true, isFile: () => false });
     }
   };
+  return _fs;
 }
