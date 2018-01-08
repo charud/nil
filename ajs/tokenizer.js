@@ -104,7 +104,7 @@ const t = tokenize.tokens = {
   TAG_START_CLOSED: '</',
   TAG_END: '>',
   TAG_END_CLOSED: '/>',
-  TAG_NAME: 'NAME',
+  TAG_NAME: 'TAG_NAME',
   ATTRIBUTE_NAME: 'ATTR_NAME',
   ATTRIBUTE_EQUAL: '=',
   ATTRIBUTE_VALUE: 'ATTR_VALUE'
