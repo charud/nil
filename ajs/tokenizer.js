@@ -6,7 +6,12 @@ function tokenize(code) {
   const read = {
     start: char => {
       if (char === '<') {
-        pushToken(t.TAG_START);
+        if (peekNextChar() === '/') {
+          pushToken(t.TAG_START_CLOSED);
+          readIndex++;
+        } else {
+          pushToken(t.TAG_START);
+        }
         state = read.tagName;
       } else {
         buffer += char;
@@ -33,10 +38,12 @@ function tokenize(code) {
         if (peekNextChar() === '>') {
           pushToken(t.TAG_END_CLOSED);
           readIndex += 2;
+          state = read.start;
         } else throw Error('Unexpected "/"');
       } else if (char === '>') {
         pushToken(t.TAG_END);
         readIndex++;
+        state = read.start;
       } else {
         state = read.attributeName;
       }
@@ -94,6 +101,7 @@ function tokenize(code) {
 
 const t = tokenize.tokens = {
   TAG_START: '<',
+  TAG_START_CLOSED: '</',
   TAG_END: '>',
   TAG_END_CLOSED: '/>',
   TAG_NAME: 'NAME',

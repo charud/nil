@@ -55,7 +55,6 @@ describe('tokenizer', () => {
     ]);
   });
 
-
   it('ignores whitespace', () => {
     expect(tokenizer('<foo     bar = "baz"   />')).toDeepEqual([
       { type: tokens.TAG_START },
@@ -64,6 +63,66 @@ describe('tokenizer', () => {
       { type: tokens.ATTRIBUTE_EQUAL },
       { type: tokens.ATTRIBUTE_VALUE, value: 'baz' },
       { type: tokens.TAG_END_CLOSED }
+    ]);
+  });
+
+  it('tokenizes a tag with a child', () => {
+    expect(tokenizer('<foo><bar /></foo>')).toDeepEqual([
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'foo' },
+      { type: tokens.TAG_END },
+
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'bar' },
+      { type: tokens.TAG_END_CLOSED },
+
+      { type: tokens.TAG_START_CLOSED },
+      { type: tokens.TAG_NAME, value: 'foo' },
+      { type: tokens.TAG_END }
+    ]);
+  });
+
+  it('tokenizes a tag with many children and whitespace', () => {
+    expect(tokenizer('<foo>\n <bar /> <baz /> \n</foo>')).toDeepEqual([
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'foo' },
+      { type: tokens.TAG_END },
+
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'bar' },
+      { type: tokens.TAG_END_CLOSED },
+
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'baz' },
+      { type: tokens.TAG_END_CLOSED },
+
+      { type: tokens.TAG_START_CLOSED },
+      { type: tokens.TAG_NAME, value: 'foo' },
+      { type: tokens.TAG_END }
+    ]);
+  });
+
+  it('tokenizes multiple levels of children', () => {
+    expect(tokenizer('<foo><bar> <baz /> </bar></foo>')).toDeepEqual([
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'foo' },
+      { type: tokens.TAG_END },
+
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'bar' },
+      { type: tokens.TAG_END },
+
+      { type: tokens.TAG_START },
+      { type: tokens.TAG_NAME, value: 'baz' },
+      { type: tokens.TAG_END_CLOSED },
+
+      { type: tokens.TAG_START_CLOSED },
+      { type: tokens.TAG_NAME, value: 'bar' },
+      { type: tokens.TAG_END },
+
+      { type: tokens.TAG_START_CLOSED },
+      { type: tokens.TAG_NAME, value: 'foo' },
+      { type: tokens.TAG_END }
     ]);
   });
 
