@@ -7,7 +7,7 @@ without using any dependencies.
 - [x] pack: Code Bundler (inspired by Webpack)
 - [ ] act: Library for client side views (inspired by React)
 - [ ] dux: Library for state management (inspired by Redux)
-- [ ] ajs: Transforms XML-like syntax into JS (inspired by JSX)
+- [x] ajs: Transforms XML-like syntax into JS (inspired by JSX)
 
 ## Install
 

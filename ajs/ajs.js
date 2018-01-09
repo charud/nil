@@ -1,8 +1,8 @@
 const tokenizer = require('./tokenizer');
 const parser = require('./parser').parse;
 
-function transform(module) {
-  const ast = parser(tokenizer(module));
+function transform(ajs) {
+  const ast = parser(tokenizer(ajs));
   const js = jsFromNode(ast.root);
   return js;
 }
