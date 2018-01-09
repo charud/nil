@@ -1,26 +1,28 @@
-// TODO: replace with parser, regexp won't be enough
-// function transform(module) {
-//   const out = module.replace(
-//     /<([^\s]+)(\s[^>]*)?\/>/g,
-//     (_, tagName, attributes) => {
-//       console.log('attrs are', attributes);
-//       console.log('attrs are split', attributes.split(/\s+/).filter());
-//       const props = attributes.split(/\s+/).filter().reduce((obj, next) => {
-//         console.log('next is', next);
-//         const kv = next.split('=');
-//         console.log('obj is', obj);
-//         obj[kv[0]] = kv[1];
-//         return obj;
-//       }, {});
-//       return `act('${tagName}', {}, ${JSON.stringify(obj)})`;
-//     });
-//   return out;
-// }
+const tokenizer = require('./tokenizer');
+const parser = require('./parser').parse;
 
 function transform(module) {
+  const ast = parser(tokenizer(module));
+  const js = jsFromNode(ast.root);
+  return js;
+}
 
-   
+function jsFromNode(node) {
+  // Turn AST attributes: [ { name: 'className', value: 'foo' } ]
+  // Into act props: { className: 'foo' }
+  const props = node.attributes.reduce((obj, next) => {
+    obj[next.name] = next.value;
+    return obj;
+  }, {});
 
+  // Transform child nodes
+  const children = node.children
+    ? node.children.map(jsFromNode).join(', ')
+    : null;
+
+  const jsonType = JSON.stringify(node.name);
+  const jsonProps = JSON.stringify(props);
+  return `act(${jsonType}, ${jsonProps}, ${children})`;
 }
 
 module.exports = transform;
